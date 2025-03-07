@@ -1,3 +1,10 @@
+body, html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden; /* Prevent horizontal scroll issues */
+}
 
 .welcome-container {
   display: flex;
@@ -47,4 +54,252 @@
 
 .logout-btn:hover {
   background-color: #d32f2f;
+}
+
+.home-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 96vh;
+  text-align: center;
+  padding: 20px;
+  position: relative;
+  /* background-image: image("../assets/homebackground.svg"); */ 
+}
+
+.footer-navbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: white; /* Change as needed */
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.nav-icon {
+  width: 30px; /* Adjust size as needed */
+  height: auto;
+  cursor: pointer;
+  margin: 13px;
+}
+
+.nav-icon:hover {
+  opacity: 0.7;
+}
+
+/* 
+.logout-btn {
+  background-color: #ff3b30;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+.logout-btn:hover {
+  background-color: #d32f2f;
+} */
+
+
+.hamburger-menu {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+}
+
+.menu-icon {
+  width: 35px; /* Adjust size as needed */
+  cursor: pointer;
+}
+
+
+.menu-dropdown {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  padding: 10px;
+  width: 150px;
+  text-align: left;
+}
+
+.menu-dropdown p {
+  padding: 10px;
+  margin: 0;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.menu-dropdown p:hover {
+  background: #f0f0f0;
+}
+
+.logout-option {
+  color: red;
+  font-weight: bold;
+}
+
+.profile-pic {
+  width: 80px;  /* Adjust size as needed */
+  height: 80px;
+  border-radius: 50%;
+  margin-top: 10px;
+  object-fit: cover;
+  border: 2px solid #ccc;
+}
+
+/* Hamburger Icon */
+.menu-icon {
+  width: 35px;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  cursor: pointer;
+}
+
+/* Sliding Menu */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: -250px; /* Initially hidden */
+  width: 250px;
+  height: 100%;
+  background: white;
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+  transition: left 0.1s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.menu-overlay.open {
+  left: 0; /* Slide in */
+}
+
+.menu-content p {
+  margin: 20px 0;
+  cursor: pointer;
+  font-size: 18px;
+  transition: 0.3s;
+}
+
+.menu-content p:hover {
+  color: #058f5af1;
+}
+
+.logout-option {
+  color: red;
+  font-weight: bold;
+}
+
+/* Close Button */
+.close-btn {
+  border: none;
+  background: none;
+  font-size: 20px;
+  cursor: pointer;
+  align-self: flex-end;
+  margin-bottom: 20px;
+}
+
+
+/* Hamburger Menu Icon */
+.hamburger-icon {
+  position: absolute;
+  height: 60px;
+  width: 60px;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.2s ease-in-out;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.icon-1, .icon-2, .icon-3 {
+  position: absolute;
+  left: 25%;
+  top: 50%;
+  width: 32px;
+  height: 3px;
+  background-color: black;
+  transition: all 400ms cubic-bezier(.84,.06,.52,1.8);
+}
+
+.icon-1 {
+  transform: translateY(-8px);
+}
+
+.icon-3 {
+  transform: translateY(8px);
+}
+
+/* Menu Animation */
+nav {
+  background: #058f5af1;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  z-index: 10;
+  opacity: 0;
+  transition: all 600ms cubic-bezier(.62,.04,.3,1.56);
+}
+
+nav.show {
+  width: 50%;
+  opacity: 1;
+}
+
+nav ul {
+  position: absolute;
+  top: 30%;
+  left: 20%;
+}
+
+nav ul li {
+  list-style: none;
+  font-size: 24px;
+  color: #fff;
+  line-height: 2.2;
+  text-transform: uppercase;
+  letter-spacing: 1.7px;
+  cursor: pointer;
+}
+
+/* Background Overlay */
+.dark-blue {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: #058f5ab9;
+  height: 100%;
+  width: 0%;
+  transition: all 500ms cubic-bezier(.62,.04,.3,1.8);
+  z-index: 5;
+  opacity: 1;
+}
+
+.dark-blue.slide {
+  width: 50%;
+  opacity: 1;
+}
+
+/* Logout Option */
+.logout-option {
+  color: red;
+  font-weight: bold;
+  cursor: pointer;
 }
