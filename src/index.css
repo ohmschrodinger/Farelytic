@@ -26,7 +26,6 @@ body, html {
   font-size: 18px;
   font-family: Arial, Helvetica, sans-serif;
   margin-bottom: 20px;
-  
   font-weight: 100;
 }
 
@@ -85,28 +84,14 @@ body, html {
   height: auto;
   cursor: pointer;
   margin: 13px;
+  opacity: 0.6;
+  transition: opacity 0.2s;
 }
 
-.nav-icon:hover {
-  opacity: 0.7;
+.nav-icon:hover,
+.nav-icon.active {
+  opacity: 1;
 }
-
-/* 
-.logout-btn {
-  background-color: #ff3b30;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  margin-top: 20px;
-}
-
-.logout-btn:hover {
-  background-color: #d32f2f;
-} */
-
 
 .hamburger-menu {
   position: fixed;
@@ -119,7 +104,6 @@ body, html {
   width: 35px; /* Adjust size as needed */
   cursor: pointer;
 }
-
 
 .menu-dropdown {
   position: absolute;
@@ -212,7 +196,6 @@ body, html {
   margin-bottom: 20px;
 }
 
-
 /* Hamburger Menu Icon */
 .hamburger-icon {
   position: absolute;
@@ -302,4 +285,209 @@ nav ul li {
   color: red;
   font-weight: bold;
   cursor: pointer;
+}
+
+/* Location Search Styles */
+.location-search-container {
+  width: 100%;
+  max-width: 500px;
+  margin: 20px auto;
+  padding: 15px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.search-title {
+  font-size: 22px;
+  text-align: left;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.location-input-group {
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.location-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+}
+
+.location-input:focus {
+  outline: none;
+  border-color: #058f5af1;
+}
+
+.search-btn {
+  background-color: #058f5af1;
+  color: white;
+  border: none;
+  width: 100%;
+  padding: 12px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 10px;
+}
+
+.search-btn:hover {
+  background-color: #046e45;
+}
+
+/* User info repositioned */
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px 0;
+}
+
+/* Search status */
+.search-status {
+  margin: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  text-align: center;
+}
+
+/* Profile page styles */
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  padding-bottom: 80px; /* Make room for footer navbar */
+  min-height: 90vh;
+}
+
+.page-title {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: #333;
+}
+
+.profile-content {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.profile-pic-container {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.profile-pic-large {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #058f5af1;
+}
+
+.profile-details {
+  margin-bottom: 20px;
+}
+
+.profile-details h3, 
+.profile-details p {
+  margin-bottom: 10px;
+}
+
+.edit-profile-btn, 
+.save-btn {
+  background-color: #058f5af1;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.edit-profile-btn:hover,
+.save-btn:hover {
+  background-color: #046e45;
+}
+
+.edit-profile-form {
+  margin-top: 15px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+  text-align: left;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 16px;
+}
+
+.form-group small {
+  color: #777;
+  font-size: 12px;
+  display: block;
+  text-align: left;
+  margin-top: 5px;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.cancel-btn {
+  background-color: #95a5a6;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  flex: 1;
+}
+
+.cancel-btn:hover {
+  background-color: #7f8c8d;
+}
+
+.save-btn {
+  flex: 1;
+}
+
+.error-message {
+  color: #e74c3c;
+  margin: 10px 0;
+}
+
+.success-message {
+  color: #2ecc71;
+  margin: 10px 0;
 }
