@@ -1,9 +1,15 @@
 import React, { useState } from "react";
-import menuIcon from "../assets/menu.svg"; // Your custom hamburger icon
-import "../index.css"; // Make sure styles are properly linked
+import { useNavigate } from "react-router-dom";
+import "../index.css";
 
 const HamburgerMenu = ({ onLogout }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleNavigation = (path) => {
+    navigate(path);
+    setIsOpen(false); // Close the menu after navigating
+  };
 
   return (
     <>
@@ -17,10 +23,10 @@ const HamburgerMenu = ({ onLogout }) => {
       {/* Menu Overlay */}
       <nav className={isOpen ? "show" : ""}>
         <ul>
-          <li>Home</li>
-          <li>About</li>
-          <li>Services</li>
-          <li>Help And Support</li>
+          <li onClick={() => handleNavigation("/")}>Home</li>
+          <li onClick={() => handleNavigation("/about")}>About</li>
+          <li onClick={() => handleNavigation("/services")}>Services</li>
+          <li onClick={() => handleNavigation("/contact")}>Contact Us</li>
           <li className="logout-option" onClick={onLogout}>Logout</li>
         </ul>
       </nav>

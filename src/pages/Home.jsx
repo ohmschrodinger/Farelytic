@@ -3,8 +3,6 @@ import { auth } from "../firebase";
 import HamburgerMenu from "../components/HamburgerMenu";
 import homeIcon from "../assets/home.svg";
 import profileIcon from "../assets/profile.svg";
-
-
 import "../index.css";
 
 const Home = ({ user }) => {
