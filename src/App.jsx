@@ -15,13 +15,14 @@ import "./index.css";
 function App() {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [mongoData, setMongoData] = useState([]);
 
+  // Handling Firebase Auth State
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
       setLoading(false);
     });
-
     return () => unsubscribe();
   }, []);
 
@@ -33,6 +34,16 @@ function App() {
     }
   };
 
+  // Fetching Data from MongoDB
+  useEffect(() => {
+    if (user) {
+      fetch("http://localhost:5000/api/data")
+        .then((response) => response.json())
+        .then((data) => setMongoData(data))
+        .catch((error) => console.error("Error fetching data:", error));
+    }
+  }, [user]);
+
   if (loading) {
     return <div className="loading">Loading...</div>;
   }
@@ -42,11 +53,11 @@ function App() {
       <Router>
         <Routes>
           <Route path="/signin" element={!user ? <SignIn /> : <Navigate to="/" />} />
-          <Route path="/about" element={user ? <About user={user} onLogout={handleLogout} /> : <Navigate to="/signin" />} />
+          <Route path="/about" element={user ? <About user={user} onLogout={handleLogout} mongoData={mongoData} /> : <Navigate to="/signin" />} />
           <Route path="/services" element={user ? <Services user={user} onLogout={handleLogout} /> : <Navigate to="/signin" />} />
           <Route path="/contact" element={user ? <Contact user={user} onLogout={handleLogout} /> : <Navigate to="/signin" />} />
           <Route path="/profile" element={user ? <Profile user={user} /> : <Navigate to="/signin" />} />
-          <Route path="/" element={user ? <Home user={user} /> : <Navigate to="/signin" />} />
+          <Route path="/" element={user ? <Home user={user} mongoData={mongoData} /> : <Navigate to="/signin" />} />
         </Routes>
       </Router>
     </ErrorBoundary>
