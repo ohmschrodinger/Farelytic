@@ -1,236 +1,334 @@
+/* Base styles with improved aesthetics */
+:root {
+  --primary-color: #2ecc71;
+  --primary-hover: #27ae60;
+  --secondary-color: #3498db;
+  --danger-color: #e74c3c;
+  --danger-hover: #c0392b;
+  --text-color: #2c3e50;
+  --light-text: #7f8c8d;
+  --background: #f9f9f9;
+  --card-background: #ffffff;
+  --border-radius: 12px;
+  --shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  --transition: all 0.3s ease;
+  --font-main: 'Poppins', Arial, sans-serif;
+  --search-width: 100%; /* Standardized width for search elements */
+  --max-search-width: 550px; /* Maximum width for search bars */
+}
+
 body, html {
   margin: 0;
   padding: 0;
   width: 100%;
   height: 100%;
-  overflow-x: hidden; /* Prevent horizontal scroll issues */
+  overflow-x: hidden;
+  font-family: var(--font-main);
+  color: var(--text-color);
+  background-color: var(--background);
 }
 
-.welcome-container {
+/* Logo styling - updated for Farelytic text logo */
+.logo-container {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  pointer-events: none; /* Prevents the logo from interfering with clicks */
+}
+
+.logo {
+  height: 40px;
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
+}
+
+/* Farelytic text logo styling - added like Uber's style */
+.farelytic-logo {
+  font-family: var(--font-main);
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  color: var(--primary-color);
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 99;
+  pointer-events: none;
+  text-transform: lowercase;
+}
+
+@media (max-width: 768px) {
+  .logo-container {
+    top: 15px;
+  }
+  
+  .logo {
+    height: 30px;
+  }
+  
+  .farelytic-logo {
+    font-size: 24px;
+    top: 15px;
+  }
+}
+
+/* Container elements with improved aesthetics */
+.welcome-container, .home-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  min-height: 100vh;
   text-align: center;
-  padding: 20px;
+  padding: 30px;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
 }
 
 .welcome-image {
   width: 80%;
-  max-width: 300px;
-  margin-bottom: 20px;
+  max-width: 280px;
+  margin-bottom: 30px;
+  margin-top: 50px; /* Added space for the fixed logo */
+  filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
+  transition: transform 0.3s ease;
+}
+
+.welcome-image:hover {
+  transform: translateY(-5px);
 }
 
 .welcome-text {
-  font-size: 18px;
-  font-family: Arial, Helvetica, sans-serif;
-  margin-bottom: 20px;
-  font-weight: 100;
+  font-size: 20px;
+  font-weight: 300;
+  line-height: 1.6;
+  margin-bottom: 30px;
+  color: var(--text-color);
+  max-width: 600px;
 }
 
+/* Buttons with improved aesthetics */
 .google-signin-btn,
-.logout-btn {
-  /* background-color: #4285f4; */
-  background-color: #058f5af1;
+.logout-btn,
+.search-btn,
+.edit-profile-btn,
+.save-btn {
+  background: var(--primary-color);
   color: white;
   border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
+  padding: 12px 24px;
+  border-radius: var(--border-radius);
   font-size: 16px;
+  font-weight: 500;
   cursor: pointer;
-  width: 100%;
+  transition: var(--transition);
+  box-shadow: 0 4px 6px rgba(46, 204, 113, 0.2);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  width: var(--search-width);
+  max-width: var(--max-search-width);
+  margin: 10px auto;
+}
+
+.google-signin-btn:hover,
+.search-btn:hover,
+.edit-profile-btn:hover,
+.save-btn:hover {
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 7px 14px rgba(46, 204, 113, 0.3);
 }
 
 .logout-btn {
-  background-color: #ff3b30;
+  background: var(--danger-color);
+  box-shadow: 0 4px 6px rgba(231, 76, 60, 0.2);
   margin-top: 20px;
 }
 
-.google-signin-btn:hover {
-  background-color: #058f5af1;
-}
-
 .logout-btn:hover {
-  background-color: #d32f2f;
+  background: var(--danger-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 7px 14px rgba(231, 76, 60, 0.3);
 }
 
-.home-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  height: 96vh;
-  text-align: center;
-  padding: 20px;
-  position: relative;
-  /* background-image: image("../assets/homebackground.svg"); */ 
+.cancel-btn {
+  background-color: #95a5a6;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  font-weight: 500;
+  transition: var(--transition);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  flex: 1;
 }
 
+.cancel-btn:hover {
+  background-color: #7f8c8d;
+  transform: translateY(-2px);
+}
+
+/* Footer navbar with improved aesthetics */
 .footer-navbar {
   position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
-  background: white; /* Change as needed */
+  background: var(--card-background);
   display: flex;
-  justify-content: space-between;
-  padding: 10px;
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  justify-content: space-around; /* Changed from space-between for better mobile layout */
+  padding: 15px 5px; /* Reduced horizontal padding for mobile */
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
+  border-radius: 20px 20px 0 0;
+  z-index: 100;
 }
 
 .nav-icon {
-  width: 30px; /* Adjust size as needed */
+  width: 24px; /* Smaller for mobile */
   height: auto;
   cursor: pointer;
-  margin: 13px;
+  margin: 8px;
   opacity: 0.6;
-  transition: opacity 0.2s;
+  transition: var(--transition);
+  position: relative;
 }
 
 .nav-icon:hover,
 .nav-icon.active {
   opacity: 1;
+  transform: translateY(-4px);
 }
 
+.nav-icon.active::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--primary-color);
+  border-radius: 10px;
+}
+
+/* Hamburger menu with improved aesthetics - updated so menu only shows when clicked */
 .hamburger-menu {
   position: fixed;
-  top: 10px;
-  left: 10px;
+  top: 20px;
+  left: 20px;
   z-index: 1000;
 }
 
 .menu-icon {
-  width: 35px; /* Adjust size as needed */
+  width: 35px; /* Slightly smaller for mobile */
   cursor: pointer;
+  transition: var(--transition);
 }
 
-.menu-dropdown {
-  position: absolute;
-  top: 50px;
-  left: 0;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-  padding: 10px;
-  width: 150px;
-  text-align: left;
+.menu-icon:hover {
+  transform: rotate(90deg);
 }
 
-.menu-dropdown p {
-  padding: 10px;
-  margin: 0;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.menu-dropdown p:hover {
-  background: #f0f0f0;
-}
-
-.logout-option {
-  color: red;
-  font-weight: bold;
-}
-
-.profile-pic {
-  width: 80px;  /* Adjust size as needed */
-  height: 80px;
-  border-radius: 50%;
-  margin-top: 10px;
-  object-fit: cover;
-  border: 2px solid #ccc;
-}
-
-/* Hamburger Icon */
-.menu-icon {
-  width: 35px;
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  cursor: pointer;
-}
-
-/* Sliding Menu */
 .menu-overlay {
   position: fixed;
   top: 0;
-  left: -250px; /* Initially hidden */
-  width: 250px;
+  left: -300px;
+  width: 85%; /* Percentage-based for mobile */
+  max-width: 300px;
   height: 100%;
-  background: white;
-  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
-  transition: left 0.1s ease-in-out;
+  background: var(--card-background);
+  box-shadow: 5px 0 25px rgba(0, 0, 0, 0.1);
+  transition: left 0.3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   display: flex;
   flex-direction: column;
-  padding: 20px;
+  padding: 30px 20px; /* Added horizontal padding */
+  z-index: 1000;
+  overflow-y: auto; /* For smaller screens */
 }
 
 .menu-overlay.open {
-  left: 0; /* Slide in */
+  left: 0;
 }
 
 .menu-content p {
-  margin: 20px 0;
+  margin: 15px 0;
   cursor: pointer;
-  font-size: 18px;
-  transition: 0.3s;
+  font-size: 16px; /* Smaller for mobile */
+  transition: var(--transition);
+  padding: 10px 15px;
+  border-radius: 10px;
 }
 
 .menu-content p:hover {
-  color: #058f5af1;
+  color: var(--primary-color);
+  background-color: rgba(46, 204, 113, 0.1);
+  transform: translateX(5px);
 }
 
-.logout-option {
-  color: red;
-  font-weight: bold;
-}
-
-/* Close Button */
 .close-btn {
   border: none;
   background: none;
-  font-size: 20px;
+  font-size: 24px;
   cursor: pointer;
   align-self: flex-end;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
 }
 
-/* Hamburger Menu Icon */
+.close-btn:hover {
+  background: rgba(0, 0, 0, 0.05);
+  transform: rotate(90deg);
+}
+
+/* Hamburger icon animation */
 .hamburger-icon {
   position: absolute;
-  height: 60px;
-  width: 60px;
-  top: 10px;
-  left: 10px;
+  height: 45px;
+  width: 45px;
+  top: 15px;
+  left: 15px;
   z-index: 1000;
   cursor: pointer;
   border-radius: 50%;
-  transition: all 0.2s ease-in-out;
-  background: rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease-in-out;
+  background: var(--card-background);
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .icon-1, .icon-2, .icon-3 {
-  position: absolute;
-  left: 25%;
-  top: 50%;
-  width: 32px;
-  height: 3px;
-  background-color: black;
+  position: relative;
+  width: 22px; /* Smaller for mobile */
+  height: 2px;
+  background-color: var(--text-color);
+  margin: 3px 0;
+  border-radius: 3px;
   transition: all 400ms cubic-bezier(.84,.06,.52,1.8);
 }
 
-.icon-1 {
-  transform: translateY(-8px);
+.hamburger-icon:hover .icon-1,
+.hamburger-icon:hover .icon-2, 
+.hamburger-icon:hover .icon-3 {
+  background-color: var(--primary-color);
 }
 
-.icon-3 {
-  transform: translateY(8px);
-}
-
-/* Menu Animation */
+/* Menu animation - modified to only show when clicked */
 nav {
-  background: #058f5af1;
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
   position: absolute;
   top: 0;
   left: 0;
@@ -239,292 +337,280 @@ nav {
   z-index: 10;
   opacity: 0;
   transition: all 600ms cubic-bezier(.62,.04,.3,1.56);
+  border-radius: 0 20px 20px 0;
+  visibility: hidden; /* Added to ensure menu is hidden by default */
 }
 
 nav.show {
-  width: 50%;
+  width: 85%; /* Wider for mobile */
+  max-width: 300px;
   opacity: 1;
+  visibility: visible; /* Show menu when .show class is applied */
 }
 
 nav ul {
   position: absolute;
   top: 30%;
   left: 20%;
+  list-style: none;
+  padding: 0;
 }
 
 nav ul li {
-  list-style: none;
-  font-size: 24px;
-  color: #fff;
+  font-size: 18px; /* Smaller for mobile */
+  color: white;
   line-height: 2.2;
   text-transform: uppercase;
-  letter-spacing: 1.7px;
+  letter-spacing: 1.5px;
   cursor: pointer;
+  padding: 8px 15px;
+  border-radius: 10px;
+  transition: var(--transition);
 }
 
-/* Background Overlay */
+nav ul li:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateX(5px);
+}
+
+/* Background overlay - modified to only show when menu is clicked */
 .dark-blue {
   position: absolute;
   top: 0;
   left: 0;
-  background: #058f5ab9;
+  background: rgba(5, 143, 90, 0.7);
   height: 100%;
   width: 0%;
   transition: all 500ms cubic-bezier(.62,.04,.3,1.8);
   z-index: 5;
-  opacity: 1;
+  opacity: 0; /* Hidden by default */
+  backdrop-filter: blur(5px);
+  visibility: hidden; /* Added to ensure overlay is hidden by default */
 }
 
 .dark-blue.slide {
-  width: 50%;
+  width: 85%; /* Match nav width */
+  max-width: 300px;
   opacity: 1;
+  visibility: visible; /* Show overlay when .slide class is applied */
 }
 
-/* Logout Option */
-.logout-option {
-  color: red;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-/* Location Search Styles */
-.location-search-container {
-  width: 100%;
-  max-width: 500px;
-  margin: 20px auto;
-  padding: 15px;
-  background-color: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.search-title {
-  font-size: 22px;
-  text-align: left;
-  margin-bottom: 15px;
-  color: #333;
-}
-
-.location-input-group {
-  margin-bottom: 12px;
-  position: relative;
-}
-
-.location-input {
-  width: 100%;
-  padding: 12px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  font-size: 16px;
-  transition: border-color 0.3s;
-}
-
-.location-input:focus {
-  outline: none;
-  border-color: #058f5af1;
-}
-
-.search-btn {
-  background-color: #058f5af1;
-  color: white;
-  border: none;
-  width: 100%;
-  padding: 12px;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin-top: 10px;
-}
-
-.search-btn:hover {
-  background-color: #046e45;
-}
-
-/* User info repositioned */
-.user-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px 0;
-}
-
-/* Search status */
-.search-status {
-  margin: 20px;
-  padding: 15px;
-  background-color: #f9f9f9;
-  border-radius: 5px;
-  text-align: center;
-}
-
-/* Profile page styles */
+/* Profile styles with improved aesthetics */
 .profile-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 20px;
-  max-width: 600px;
+  padding: 70px 20px 100px; /* Increased top padding for logo */
+  max-width: var(--max-search-width);
   margin: 0 auto;
-  padding-bottom: 80px; /* Make room for footer navbar */
   min-height: 90vh;
 }
 
 .page-title {
   text-align: center;
-  margin-bottom: 20px;
-  font-size: 24px;
-  color: #333;
+  margin-bottom: 30px;
+  font-size: 24px; /* Smaller for mobile */
+  color: var(--text-color);
+  font-weight: 600;
 }
 
 .profile-content {
-  background-color: white;
-  border-radius: 8px;
-  padding: 20px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  padding: 25px 20px; /* Smaller padding for mobile */
+  box-shadow: var(--shadow);
+  margin-bottom: 30px;
   width: 100%;
+  transition: var(--transition);
+}
+
+.profile-content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
 .profile-pic-container {
   text-align: center;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
+.profile-pic, 
 .profile-pic-large {
-  width: 120px;
+  position: relative;
+  width: 120px; /* Smaller for mobile */
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
-  border: 3px solid #058f5af1;
+  border: 4px solid var(--primary-color);
+  box-shadow: 0 5px 15px rgba(46, 204, 113, 0.3);
+  transition: var(--transition);
+}
+
+.profile-pic:hover, 
+.profile-pic-large:hover {
+  transform: scale(1.05);
+  border-color: var(--secondary-color);
 }
 
 .profile-details {
-  margin-bottom: 20px;
+  margin-bottom: 25px;
 }
 
-.profile-details h3, 
+.profile-details h3 {
+  font-size: 20px; /* Smaller for mobile */
+  margin-bottom: 12px;
+  color: var(--text-color);
+}
+
 .profile-details p {
-  margin-bottom: 10px;
+  margin-bottom: 15px;
+  line-height: 1.6;
+  color: var(--light-text);
+  font-size: 15px; /* Smaller for mobile */
 }
 
-.edit-profile-btn, 
-.save-btn {
-  background-color: #058f5af1;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-  width: 100%;
-  margin-top: 10px;
-}
-
-.edit-profile-btn:hover,
-.save-btn:hover {
-  background-color: #046e45;
-}
-
+/* Form elements with improved aesthetics */
 .edit-profile-form {
-  margin-top: 15px;
+  margin-top: 25px;
+  width: 100%;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  position: relative;
+  width: 100%;
 }
 
 .form-group label {
   display: block;
-  margin-bottom: 5px;
-  font-weight: bold;
+  margin-bottom: 8px;
+  font-weight: 500;
   text-align: left;
+  color: var(--text-color);
+  font-size: 15px; /* Smaller for mobile */
 }
 
 .form-group input {
   width: 100%;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-  font-size: 16px;
+  padding: 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: var(--border-radius);
+  font-size: 15px; /* Smaller for mobile */
+  transition: var(--transition);
+  background-color: #f8f9fa;
+  box-sizing: border-box; /* Important for consistent widths */
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+  background-color: white;
 }
 
 .form-group small {
-  color: #777;
-  font-size: 12px;
+  color: var(--light-text);
+  font-size: 13px;
   display: block;
   text-align: left;
-  margin-top: 5px;
+  margin-top: 8px;
 }
 
 .form-buttons {
   display: flex;
-  gap: 10px;
-  margin-top: 20px;
+  gap: 15px;
+  margin-top: 30px;
+  width: 100%;
 }
 
-.cancel-btn {
-  background-color: #95a5a6;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-  flex: 1;
+/* Search location with improved aesthetics */
+.location-search-container {
+  width: var(--search-width);
+  max-width: var(--max-search-width);
+  margin: 70px auto 25px; /* Increased top margin for logo */
+  padding: 20px;
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  box-sizing: border-box; /* Important for consistent widths */
 }
 
-.cancel-btn:hover {
-  background-color: #7f8c8d;
+.location-search-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
 }
 
-.save-btn {
-  flex: 1;
+.search-title {
+  font-size: 22px; /* Smaller for mobile */
+  text-align: left;
+  margin-bottom: 20px;
+  color: var(--text-color);
+  font-weight: 600;
 }
 
-.error-message {
-  color: #e74c3c;
-  margin: 10px 0;
+.location-input-group {
+  margin-bottom: 20px;
+  position: relative;
+  width: 100%;
 }
 
-.success-message {
-  color: #2ecc71;
-  margin: 10px 0;
+.location-input {
+  width: 100%;
+  padding: 14px;
+  border: 2px solid #e0e0e0;
+  border-radius: var(--border-radius);
+  font-size: 15px; /* Smaller for mobile */
+  transition: var(--transition);
+  background-color: #f8f9fa;
+  box-sizing: border-box; /* Important for consistent widths */
 }
 
-
-/* Add this to your index.css file */
+.location-input:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
+  background-color: white;
+}
 
 .input-with-icon {
   position: relative;
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 .loading-spinner {
   position: absolute;
-  right: 40px;
-  width: 16px;
-  height: 16px;
+  right: 50px;
+  width: 18px; /* Smaller for mobile */
+  height: 18px;
   border: 2px solid rgba(0, 0, 0, 0.1);
-  border-top: 2px solid #3498db;
+  border-top: 2px solid var(--secondary-color);
   border-radius: 50%;
   animation: spin 1s linear infinite;
 }
 
 .current-location-btn {
   position: absolute;
-  right: 10px;
+  right: 15px;
   background: none;
   border: none;
-  font-size: 18px;
+  font-size: 18px; /* Smaller for mobile */
   cursor: pointer;
+  color: var(--primary-color);
   padding: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
+  transition: var(--transition);
+}
+
+.current-location-btn:hover {
+  transform: scale(1.2);
+  color: var(--primary-hover);
 }
 
 .suggestions-container {
@@ -532,31 +618,178 @@ nav ul li {
   width: 100%;
   max-height: 200px;
   overflow-y: auto;
-  background: white;
-  border: 1px solid #ddd;
-  border-radius: 0 0 4px 4px;
+  background: var(--card-background);
+  border: 1px solid #e0e0e0;
+  border-radius: 0 0 var(--border-radius) var(--border-radius);
   z-index: 1000;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 .suggestion-item {
-  padding: 10px 15px;
+  padding: 12px 18px;
   cursor: pointer;
   border-bottom: 1px solid #f0f0f0;
+  transition: var(--transition);
+  font-size: 14px; /* Smaller for mobile */
 }
 
 .suggestion-item:hover {
-  background-color: #f8f8f8;
+  background-color: rgba(46, 204, 113, 0.1);
+  padding-left: 25px;
+}
+
+.search-status {
+  margin: 25px;
+  padding: 20px;
+  background-color: var(--card-background);
+  border-radius: var(--border-radius);
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  width: 100%;
+  max-width: var(--max-search-width);
+  box-sizing: border-box;
+}
+
+.search-status:hover {
+  transform: translateY(-3px);
+}
+
+.error-message {
+  color: var(--danger-color);
+  margin: 15px 0;
+  padding: 10px;
+  border-radius: var(--border-radius);
+  background-color: rgba(231, 76, 60, 0.1);
+  font-size: 14px; /* Smaller for mobile */
+}
+
+.success-message {
+  color: var(--primary-color);
+  margin: 15px 0;
+  padding: 10px;
+  border-radius: var(--border-radius);
+  background-color: rgba(46, 204, 113, 0.1);
+  font-size: 14px; /* Smaller for mobile */
 }
 
 .attribution {
-  font-size: 10px;
+  font-size: 11px; /* Smaller for mobile */
   text-align: center;
-  margin-top: 10px;
-  color: #999;
+  margin-top: 15px;
+  color: var(--light-text);
 }
 
+/* Animation */
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+/* Enhanced Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  :root {
+    --max-search-width: 100%; /* Full width on mobile */
+  }
+  
+  .profile-content,
+  .location-search-container {
+    padding: 15px;
+    width: 100%;
+  }
+  
+  .nav-icon {
+    margin: 5px;
+    width: 22px;
+  }
+  
+  .page-title {
+    font-size: 22px;
+  }
+  
+  .search-title {
+    font-size: 20px;
+  }
+  
+  .form-buttons {
+    flex-direction: column;
+  }
+  
+  .form-group input,
+  .location-input {
+    padding: 12px;
+    font-size: 14px;
+  }
+  
+  .search-btn, 
+  .google-signin-btn,
+  .edit-profile-btn,
+  .save-btn,
+  .cancel-btn,
+  .logout-btn {
+    padding: 10px 15px;
+    font-size: 14px;
+  }
+  
+  .welcome-text {
+    font-size: 16px;
+  }
+  
+  .profile-pic,
+  .profile-pic-large {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .farelytic-logo {
+    font-size: 22px;
+  }
+}
+
+@media (max-width: 480px) {
+  .hamburger-icon {
+    height: 40px;
+    width: 40px;
+    top: 10px;
+    left: 10px;
+  }
+  
+  .icon-1, .icon-2, .icon-3 {
+    width: 20px;
+  }
+  
+  .footer-navbar {
+    padding: 10px 5px;
+  }
+  
+  .nav-icon {
+    width: 20px;
+    margin: 5px;
+  }
+  
+  .search-title {
+    font-size: 18px;
+  }
+  
+  .page-title {
+    font-size: 20px;
+  }
+  
+  .welcome-text {
+    font-size: 15px;
+  }
+  
+  .farelytic-logo {
+    font-size: 20px;
+  }
+}
+
+/* Add glassmorphism effect to specific elements */
+.footer-navbar,
+.menu-overlay,
+.hamburger-icon,
+.logo-container,
+.farelytic-logo {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
 }
