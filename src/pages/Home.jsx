@@ -29,7 +29,7 @@ const Home = ({ user }) => {
   return (
     <div className="home-container">
       {/* Hamburger Menu */}
-      <HamburgerMenu onLogout={handleLogout} />
+      {/* <HamburgerMenu onLogout={handleLogout} /> */}
       
       {/* Location Search */}
       <LocationSearch onSearch={handleSearch} />
