@@ -21,7 +21,7 @@ const HamburgerMenu = ({ onLogout }) => {
       </div>
 
       {/* Menu Overlay */}
-      <nav className={isOpen ? "show" : ""}>
+      <nav className={isOpen ? "show" : "no"}>
         <ul>
           <li onClick={() => handleNavigation("/")}>Home</li>
           <li onClick={() => handleNavigation("/about")}>About</li>

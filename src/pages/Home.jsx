@@ -7,6 +7,7 @@ import LocationSearch from "../components/LocationSearch";
 import homeIcon from "../assets/home.svg";
 import profileIcon from "../assets/profile.svg";
 import "../index.css";
+import Ham from "../components/Ham";
 
 const Home = ({ user }) => {
   const navigate = useNavigate();
@@ -29,17 +30,19 @@ const Home = ({ user }) => {
   return (
     <div className="home-container">
       {/* Hamburger Menu */}
-      {/* <HamburgerMenu onLogout={handleLogout} /> */}
-      
+      <HamburgerMenu onLogout={handleLogout} />
+      {/* <Ham /> */}
+      <div>
+        
       {/* Location Search */}
-      <LocationSearch onSearch={handleSearch} />
       
       {/* User Info - Moving this below the search */}
       <div className="user-info">
         <h3 className="welcome-text">Welcome, {user?.displayName || "User"}!</h3>
-        {user?.photoURL && <img src={user.photoURL} alt="Profile" className="profile-pic" />}
+        {/* {user?.photoURL && <img src={user.photoURL} alt="Profile" className="profile-pic" />} */}
       </div>
 
+      <LocationSearch onSearch={handleSearch} />
       {/* Ride Results would go here */}
       {searchParams && (
         <div className="search-status">
@@ -47,13 +50,14 @@ const Home = ({ user }) => {
           {/* Future ride results will be displayed here */}
         </div>
       )}
+      </div>
 
       <button className="logout-btn" onClick={handleLogout}>
         Logout
       </button>
 
       {/* Footer Navbar */}
-      <footer className="footer-navbar">
+      {/* <footer className="footer-navbar">
         <img 
           src={homeIcon} 
           alt="Home" 
@@ -65,7 +69,7 @@ const Home = ({ user }) => {
           className="nav-icon" 
           onClick={() => navigate('/profile')}
         />
-      </footer>
+      </footer> */}
     </div>
   );
 };
