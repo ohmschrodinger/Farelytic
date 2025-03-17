@@ -5,14 +5,42 @@ import "../index.css";
 import welcomeImage from "../assets/welcome.svg";
 
 const SignIn = () => {
+  // const signInWithGoogle = async () => {
+  //   try {
+  //     const result = await signInWithPopup(auth, provider);
+  //     console.log("User signed in:", result.user);
+  //   } catch (error) {
+  //     console.error("Error signing in:", error);
+  //   }
+
   const signInWithGoogle = async () => {
     try {
       const result = await signInWithPopup(auth, provider);
-      console.log("User signed in:", result.user);
+      const user = result.user;
+  
+      await fetch('http://localhost:5000/api/auth/google-signin', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          uid: user.uid,
+          displayName: user.displayName,
+          email: user.email,
+          photoURL: user.photoURL
+        })
+      });
+  
+      console.log("User signed in and saved to DB:", user);
     } catch (error) {
       console.error("Error signing in:", error);
     }
+  
+  
   };
+
+ 
+  
 
   return (
     <div className="welcome-container">

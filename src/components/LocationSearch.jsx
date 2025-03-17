@@ -18,7 +18,7 @@ const LocationSearch = ({ onSearch }) => {
   const pickupInputRef = useRef(null);
   const dropoffInputRef = useRef(null);
 
-  const handlePlaceSelect = useCallback((place, setSelected) => {
+  const handlePlaceSelect = useCallback((place, setSelected, setInputValue) => {
     if (!place.geometry) {
       console.log("No location data available for this place");
       setError("Invalid location selected. Please try again.");
@@ -32,7 +32,11 @@ const LocationSearch = ({ onSearch }) => {
       placeId: place.place_id,
     };
 
+    // Update the selected location data
     setSelected(locationData);
+    
+    // Update the input field value with the formatted address
+    setInputValue(locationData.name);
   }, []);
 
   const initializePlacesAutocomplete = useCallback(() => {
@@ -41,7 +45,7 @@ const LocationSearch = ({ onSearch }) => {
       return;
     }
 
-    const initAutocomplete = (inputRef, setSelected) => {
+    const initAutocomplete = (inputRef, setSelected, setInputValue) => {
       if (inputRef.current) {
         const autocomplete = new window.google.maps.places.Autocomplete(inputRef.current, {
           types: ["geocode", "establishment"],
@@ -49,16 +53,16 @@ const LocationSearch = ({ onSearch }) => {
 
         autocomplete.addListener("place_changed", () => {
           const place = autocomplete.getPlace();
-          handlePlaceSelect(place, setSelected);
+          handlePlaceSelect(place, setSelected, setInputValue);
         });
 
         return autocomplete;
       }
     };
 
-    pickupAutocompleteRef.current = initAutocomplete(pickupInputRef, setSelectedPickup);
-    dropoffAutocompleteRef.current = initAutocomplete(dropoffInputRef, setSelectedDropoff);
-  }, [handlePlaceSelect]); // Depend on `handlePlaceSelect`
+    pickupAutocompleteRef.current = initAutocomplete(pickupInputRef, setSelectedPickup, setPickup);
+    dropoffAutocompleteRef.current = initAutocomplete(dropoffInputRef, setSelectedDropoff, setDropoff);
+  }, [handlePlaceSelect]);
 
   useEffect(() => {
     if (!apiKey) {
@@ -92,7 +96,7 @@ const LocationSearch = ({ onSearch }) => {
         window.google.maps.event.clearInstanceListeners(dropoffAutocompleteRef.current);
       }
     };
-  }, [apiKey, initializePlacesAutocomplete]); // Fix: Add `initializePlacesAutocomplete`
+  }, [apiKey, initializePlacesAutocomplete]);
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -165,7 +169,12 @@ const LocationSearch = ({ onSearch }) => {
               className="location-input"
               placeholder={mapsLoading ? "Loading maps..." : "Enter pickup location"}
               value={pickup}
-              onChange={(e) => setPickup(e.target.value)}
+              onChange={(e) => {
+                setPickup(e.target.value);
+                if (e.target.value === '') {
+                  setSelectedPickup(null);
+                }
+              }}
               disabled={mapsLoading}
               required
             />
@@ -188,7 +197,12 @@ const LocationSearch = ({ onSearch }) => {
             className="location-input"
             placeholder={mapsLoading ? "Loading maps..." : "Enter drop location"}
             value={dropoff}
-            onChange={(e) => setDropoff(e.target.value)}
+            onChange={(e) => {
+              setDropoff(e.target.value);
+              if (e.target.value === '') {
+                setSelectedDropoff(null);
+              }
+            }}
             disabled={mapsLoading}
             required
           />

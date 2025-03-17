@@ -8,7 +8,7 @@ import homeIcon from "../assets/home.svg";
 import profileIcon from "../assets/profile.svg";
 import "../index.css";
 
-const Home = ({ user, mongoData }) => {
+const Home = ({ user }) => {
   const navigate = useNavigate();
   const [searchParams, setSearchParams] = useState(null);
 
@@ -22,7 +22,9 @@ const Home = ({ user, mongoData }) => {
 
   const handleSearch = (locations) => {
     setSearchParams(locations);
+    // In the future, you would fetch ride prices here
     console.log("Searching for rides:", locations);
+    // Now you have access to coordinates if available
     if (locations.pickup.lat && locations.pickup.lng && 
         locations.dropoff.lat && locations.dropoff.lng) {
       console.log("Pickup coordinates:", locations.pickup.lat, locations.pickup.lng);
@@ -38,29 +40,13 @@ const Home = ({ user, mongoData }) => {
       {/* Location Search */}
       <LocationSearch onSearch={handleSearch} />
       
-      {/* User Info */}
+      {/* User Info - Moving this below the search */}
       <div className="user-info">
         <h3 className="welcome-text">Welcome, {user?.displayName || "User"}!</h3>
         {user?.photoURL && <img src={user.photoURL} alt="Profile" className="profile-pic" />}
       </div>
 
-      {/* MongoDB Data Section */}
-      <div className="mongo-data">
-        <h3>MongoDB Data:</h3>
-        <ul>
-          {mongoData.length > 0 ? (
-            mongoData.map((item) => (
-              <li key={item._id}>
-                {item.name} - {item.age} years old
-              </li>
-            ))
-          ) : (
-            <p>No data found.</p>
-          )}
-        </ul>
-      </div>
-
-      {/* Ride Results */}
+      {/* Ride Results would go here */}
       {searchParams && (
         <div className="search-status">
           <p>Searching for rides from {searchParams.pickup.name} to {searchParams.dropoff.name}...</p>
@@ -75,6 +61,7 @@ const Home = ({ user, mongoData }) => {
               ).toFixed(2)} km
             </p>
           )}
+          {/* Future ride results will be displayed here */}
         </div>
       )}
 
