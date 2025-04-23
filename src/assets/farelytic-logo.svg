@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="200" viewBox="0 0 1000 200">
+  <defs>
+    <linearGradient id="logoGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#2ecc71;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3498db;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <text x="0" y="150" font-family="Poppins, -apple-system, BlinkMacSystemFont, sans-serif" font-size="150" font-weight="700" letter-spacing="-5" fill="url(#logoGradient)">FARELYTIC</text>
+</svg>

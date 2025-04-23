@@ -32,39 +32,35 @@ body, html {
 .logo-container {
   position: fixed;
   top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 80px; /* Positioned to the right of menu button */
   z-index: 99;
   display: flex;
-  justify-content: center;
-  pointer-events: none; /* Prevents the logo from interfering with clicks */
+  justify-content: flex-start;
+  pointer-events: none;
 }
 
 .logo {
-  height: 40px;
+  height: 45px;
   filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.2));
 }
 
-/* Farelytic text logo styling - added like Uber's style */
+/* Farelytic text logo styling */
 .farelytic-logo {
-  font-family: var(--font-main);
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: -1px;
-  color: var(--primary-color);
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.15);
+  height: 35px;
+  width: auto;
   position: fixed;
   top: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 80px; /* Positioned to the right of menu button */
   z-index: 99;
   pointer-events: none;
-  text-transform: lowercase;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  transition: var(--transition);
 }
 
 @media (max-width: 768px) {
   .logo-container {
     top: 15px;
+    left: 70px;
   }
   
   .logo {
@@ -72,8 +68,24 @@ body, html {
   }
   
   .farelytic-logo {
-    font-size: 24px;
+    height: 30px;
     top: 15px;
+    left: 70px;
+  }
+}
+
+@media (max-width: 480px) {
+  .logo-container {
+    left: 65px;
+  }
+  
+  .logo {
+    height: 25px;
+  }
+  
+  .farelytic-logo {
+    height: 25px;
+    left: 65px;
   }
 }
 
@@ -174,7 +186,7 @@ body, html {
   transform: translateY(-2px);
 }
 
-/* Footer navbar with improved aesthetics */
+/* Modern navigation styles */
 .footer-navbar {
   position: fixed;
   bottom: 0;
@@ -182,27 +194,53 @@ body, html {
   width: 100%;
   background: var(--card-background);
   display: flex;
-  justify-content: space-around; /* Changed from space-between for better mobile layout */
-  padding: 15px 5px; /* Reduced horizontal padding for mobile */
-  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.05);
+  justify-content: space-around;
+  padding: 15px 10px;
+  box-shadow: 0 -5px 15px rgba(0, 0, 0, 0.1);
   border-radius: 20px 20px 0 0;
   z-index: 100;
+  transform: translateZ(0);
+  will-change: transform;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
 }
 
 .nav-icon {
-  width: 24px; /* Smaller for mobile */
-  height: auto;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
-  margin: 8px;
-  opacity: 0.6;
+  margin: 0 15px;
+  opacity: 0.8;
   transition: var(--transition);
   position: relative;
+  padding: 8px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  color: var(--text-color);
+}
+
+.nav-icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .nav-icon:hover,
 .nav-icon.active {
   opacity: 1;
   transform: translateY(-4px);
+  background: rgba(46, 204, 113, 0.15);
+  box-shadow: 0 4px 8px rgba(46, 204, 113, 0.2);
+}
+
+.nav-icon.active {
+  background: rgba(46, 204, 113, 0.25);
 }
 
 .nav-icon.active::after {
@@ -211,9 +249,39 @@ body, html {
   bottom: -8px;
   left: 0;
   width: 100%;
-  height: 3px;
+  height: 4px;
   background: var(--primary-color);
   border-radius: 10px;
+  animation: slideIn 0.3s ease-out;
+}
+
+/* Responsive improvements for footer nav */
+@media (max-width: 768px) {
+  .footer-navbar {
+    padding: 12px 8px;
+  }
+  
+  .nav-icon {
+    width: 35px;
+    height: 35px;
+    padding: 6px;
+    margin: 0 12px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-navbar {
+    padding: 10px 5px;
+  }
+  
+  .nav-icon {
+    width: 32px;
+    height: 32px;
+    padding: 5px;
+    margin: 0 10px;
+    font-size: 12px;
+  }
 }
 
 /* Hamburger menu with improved aesthetics - updated so menu only shows when clicked */
@@ -792,4 +860,107 @@ nav ul li:hover {
 .farelytic-logo {
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
+}
+
+/* Todo Component Styles */
+.todo-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.todo-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 1.5rem;
+}
+
+.todo-container form {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.todo-container input[type="text"] {
+  flex: 1;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.todo-container button {
+  padding: 0.75rem 1.5rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.todo-container button:hover {
+  background: #0056b3;
+}
+
+.todo-list {
+  list-style: none;
+  padding: 0;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border-bottom: 1px solid #eee;
+}
+
+.todo-item:last-child {
+  border-bottom: none;
+}
+
+.todo-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.todo-item span {
+  flex: 1;
+  font-size: 1rem;
+  color: #333;
+}
+
+.todo-item.completed span {
+  text-decoration: line-through;
+  color: #888;
+}
+
+.todo-item button {
+  padding: 0.5rem 1rem;
+  background: #dc3545;
+  font-size: 0.875rem;
+}
+
+.todo-item button:hover {
+  background: #c82333;
+}
+
+@media (max-width: 480px) {
+  .todo-container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  .todo-container form {
+    flex-direction: column;
+  }
+
+  .todo-container button {
+    width: 100%;
+  }
 }

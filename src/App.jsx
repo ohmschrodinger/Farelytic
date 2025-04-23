@@ -10,6 +10,7 @@ import Services from "./pages/Services";
 import Contact from "./pages/Contact";
 import Profile from "./pages/Profile";
 import ErrorBoundary from "./components/ErrorBoundary";
+import farelyticLogo from "./assets/farelytic-logo.svg";
 import "./index.css";
 
 function App() {
@@ -51,6 +52,7 @@ function App() {
   return (
     <ErrorBoundary>
       <Router>
+        <img src={farelyticLogo} alt="Farelytic" className="farelytic-logo" />
         <Routes>
           <Route path="/signin" element={!user ? <SignIn /> : <Navigate to="/" />} />
           <Route path="/about" element={user ? <About user={user} onLogout={handleLogout} mongoData={mongoData} /> : <Navigate to="/signin" />} />
