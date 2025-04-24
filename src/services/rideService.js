@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:3001';
+const API_BASE_URL = 'http://localhost:3002';
 
 export const getRidePrices = async (source, destination) => {
     try {
@@ -10,7 +10,7 @@ export const getRidePrices = async (source, destination) => {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json'
             },
-            mode: 'cors'
+            credentials: 'include'
         });
 
         console.log('Response status:', response.status);

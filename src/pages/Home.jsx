@@ -25,46 +25,56 @@ const Home = ({ user }) => {
     setSearchParams(locations);
   };
 
+  const handleBackToSearch = () => {
+    setSearchParams(null);
+  };
+
   return (
     <div className="home-container">
       {/* Hamburger Menu */}
       <HamburgerMenu onLogout={handleLogout} />
       
-      {/* Location Search */}
-      <LocationSearch onSearch={handleSearch} />
+      {/* Header Navigation */}
+      <header className="header-nav">
+        <div className="nav-links">
+          <a href="/" className="nav-link active">
+            <img src={homeIcon} alt="Home" />
+            Home
+          </a>
+          <a href="/profile" className="nav-link">
+            <img src={profileIcon} alt="Profile" />
+            Profile
+          </a>
+        </div>
+        <div className="user-info">
+          <p className="welcome-text">Welcome, {user?.displayName || "User"}!</p>
+          {user?.photoURL && <img src={user.photoURL} alt="Profile" className="profile-pic" />}
+        </div>
+      </header>
       
-      {/* User Info */}
-      <div className="user-info">
-        <h3 className="welcome-text">Welcome, {user?.displayName || "User"}!</h3>
-        {user?.photoURL && <img src={user.photoURL} alt="Profile" className="profile-pic" />}
-      </div>
-
-      {/* Ride Options */}
-      {searchParams && (
-        <RideOptions 
-          source={searchParams.pickup.name} 
-          destination={searchParams.dropoff.name} 
-        />
+      {/* Conditional Rendering based on search state */}
+      {!searchParams ? (
+        // Show search section when no search params
+        <div className="search-wrapper">
+          <div>
+            <LocationSearch onSearch={handleSearch} />
+          </div>
+        </div>
+      ) : (
+        // Show ride options when search params exist
+        <div className="ride-options-wrapper">
+          <RideOptions 
+            source={searchParams.pickup.name} 
+            destination={searchParams.dropoff.name} 
+          />
+          <button 
+            className="back-to-search-btn" 
+            onClick={handleBackToSearch}
+          >
+            New Search
+          </button>
+        </div>
       )}
-
-      <button className="logout-btn" onClick={handleLogout}>
-        Logout
-      </button>
-
-      {/* Footer Navbar */}
-      <footer className="footer-navbar">
-        <img 
-          src={homeIcon} 
-          alt="Home" 
-          className="nav-icon active" 
-        />
-        <img 
-          src={profileIcon} 
-          alt="Profile" 
-          className="nav-icon" 
-          onClick={() => navigate('/profile')}
-        />
-      </footer>
     </div>
   );
 };

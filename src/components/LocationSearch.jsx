@@ -195,7 +195,7 @@ const LocationSearch = ({ onSearch }) => {
             ref={dropoffInputRef}
             type="text"
             className="location-input"
-            placeholder={mapsLoading ? "Loading maps..." : "Enter drop location"}
+            placeholder={mapsLoading ? "Loading maps..." : "Enter destination"}
             value={dropoff}
             onChange={(e) => {
               setDropoff(e.target.value);

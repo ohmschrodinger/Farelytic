@@ -47,6 +47,24 @@ const Profile = ({ user }) => {
       {/* Hamburger Menu */}
       <HamburgerMenu onLogout={handleLogout} />
       
+      {/* Header Navigation */}
+      <header className="header-nav">
+        <div className="nav-links">
+          <a href="/" className="nav-link">
+            <img src={homeIcon} alt="Home" />
+            Home
+          </a>
+          <a href="/profile" className="nav-link active">
+            <img src={profileIcon} alt="Profile" />
+            Profile
+          </a>
+        </div>
+        <div className="user-info">
+          <p className="welcome-text">Welcome, {user?.displayName || "User"}!</p>
+          {user?.photoURL && <img src={user.photoURL} alt="Profile" className="profile-pic" />}
+        </div>
+      </header>
+      
       <h2 className="page-title">Your Profile</h2>
       
       <div className="profile-content">
@@ -116,25 +134,6 @@ const Profile = ({ user }) => {
           </form>
         )}
       </div>
-      
-      <button className="logout-btn" onClick={handleLogout}>
-        Logout
-      </button>
-
-      {/* Footer Navbar */}
-      <footer className="footer-navbar">
-        <img 
-          src={homeIcon} 
-          alt="Home" 
-          className="nav-icon" 
-          onClick={() => navigate('/')}
-        />
-        <img 
-          src={profileIcon} 
-          alt="Profile" 
-          className="nav-icon active"
-        />
-      </footer>
     </div>
   );
 };

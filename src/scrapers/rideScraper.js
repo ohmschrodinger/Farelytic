@@ -4,10 +4,15 @@ class RideScraper {
     constructor() {
         // Base rates for different services
         this.rates = {
-            uber: { base: 50, perKm: 12, perMin: 2 },
-            ola: { base: 45, perKm: 11, perMin: 1.8 },
-            rapido: { base: 30, perKm: 8, perMin: 1.5 }
+            uber: { base: 50, perKm: 12, perMin: 2, avgEta: [5, 12] },
+            ola: { base: 45, perKm: 11, perMin: 1.8, avgEta: [8, 15] },
+            rapido: { base: 30, perKm: 8, perMin: 1.5, avgEta: [10, 18] }
         };
+    }
+
+    getRandomEta(range) {
+        const [min, max] = range;
+        return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     async getAllPrices(source, destination) {
@@ -38,6 +43,7 @@ class RideScraper {
         try {
             const rate = this.rates.uber;
             const price = Math.round(rate.base + (distance * rate.perKm) + (duration * rate.perMin));
+            const eta = this.getRandomEta(rate.avgEta);
             
             return {
                 service: 'Uber',
@@ -45,6 +51,8 @@ class RideScraper {
                 currency: '₹',
                 duration: duration,
                 distance: distance,
+                eta: eta,
+                totalTime: duration + eta,
                 timestamp: new Date().toISOString()
             };
         } catch (error) {
@@ -57,6 +65,7 @@ class RideScraper {
         try {
             const rate = this.rates.ola;
             const price = Math.round(rate.base + (distance * rate.perKm) + (duration * rate.perMin));
+            const eta = this.getRandomEta(rate.avgEta);
             
             return {
                 service: 'Ola',
@@ -64,6 +73,8 @@ class RideScraper {
                 currency: '₹',
                 duration: duration,
                 distance: distance,
+                eta: eta,
+                totalTime: duration + eta,
                 timestamp: new Date().toISOString()
             };
         } catch (error) {
@@ -76,6 +87,7 @@ class RideScraper {
         try {
             const rate = this.rates.rapido;
             const price = Math.round(rate.base + (distance * rate.perKm) + (duration * rate.perMin));
+            const eta = this.getRandomEta(rate.avgEta);
             
             return {
                 service: 'Rapido',
@@ -83,6 +95,8 @@ class RideScraper {
                 currency: '₹',
                 duration: duration,
                 distance: distance,
+                eta: eta,
+                totalTime: duration + eta,
                 timestamp: new Date().toISOString()
             };
         } catch (error) {
