@@ -11,13 +11,23 @@ const HamburgerMenu = ({ onLogout }) => {
     setIsOpen(false); // Close the menu after navigating
   };
 
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <>
-      {/* Hamburger Button */}
-      <div className="hamburger-icon" onClick={() => setIsOpen(!isOpen)}>
-        <div className={`icon-1 ${isOpen ? "a" : ""}`}></div>
-        <div className={`icon-2 ${isOpen ? "c" : ""}`}></div>
-        <div className={`icon-3 ${isOpen ? "b" : ""}`}></div>
+      <div className="hamburger-menu">
+        <div className="hamburger-icon" onClick={toggleMenu}>
+          <div className="icon-1"></div>
+          <div className="icon-2"></div>
+          <div className="icon-3"></div>
+        </div>
+      </div>
+
+      {/* Updated Farelytic Logo */}
+      <div className="farelytic-logo">
+        FARELYTIC
       </div>
 
       {/* Menu Overlay */}

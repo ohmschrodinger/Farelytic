@@ -1,3 +1,6 @@
+require('dotenv').config(); // Load root .env file
+require('dotenv').config({ path: './backend/server/.env' }); // Load backend server .env file
+
 const express = require('express');
 const cors = require('cors');
 const connectDB = require('./config/db');
@@ -5,22 +8,24 @@ const ridePricesRouter = require('./api/ridePrices');
 const todosRouter = require('./api/todos');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
-
-// Connect to MongoDB
-connectDB();
+const PORT = process.env.PORT || 3002;
 
 // CORS configuration
-const corsOptions = {
+app.use(cors({
     origin: 'http://localhost:3000',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Accept'],
     credentials: true
-};
+}));
 
 // Middleware
-app.use(cors(corsOptions));
 app.use(express.json());
+
+// Connect to MongoDB
+connectDB().catch(err => {
+    console.error('Failed to connect to MongoDB:', err);
+    // Don't exit process, let the application handle reconnection
+});
 
 // Request logging middleware
 app.use((req, res, next) => {
@@ -30,7 +35,7 @@ app.use((req, res, next) => {
 });
 
 // Routes
-app.use('/api', ridePricesRouter);
+app.use('/api/prices', ridePricesRouter);
 app.use('/api/todos', todosRouter);
 
 // Health check endpoint
