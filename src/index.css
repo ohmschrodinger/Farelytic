@@ -182,10 +182,10 @@ nav ul li {
 /* Remove all old logo styles */
 .logo-container, .logo {
   display: none !important;
-  }
+}
   
 /* Updated Minecraft-style Farelytic Logo */
-  .farelytic-logo {
+.farelytic-logo {
   position: fixed;
   top: 20px;
   left: 120px;
@@ -227,7 +227,7 @@ nav ul li {
     0 0 30px rgba(99, 102, 241, 0.4),
     0 0 60px rgba(99, 102, 241, 0.2),
     inset 0 0 15px rgba(99, 102, 241, 0.3);
-  }
+}
 
 @media (max-width: 768px) {
   .farelytic-logo {
@@ -262,12 +262,15 @@ nav ul li {
 }
 
 .welcome-image {
-  width: 80%;
-  max-width: 280px;
-  margin-bottom: 30px;
-  margin-top: 50px; /* Added space for the fixed logo */
+  width: 95%;
+  max-width: 600px;
+  margin-bottom: 50px;
+  margin-top: 70px;
   filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.1));
   transition: transform 0.3s ease;
+  image-rendering: pixelated;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: none;
 }
 
 .welcome-image:hover {
@@ -283,9 +286,9 @@ nav ul li {
   background: var(--primary-color);
   color: white;
   border: none;
-  padding: 12px 24px;
+  padding: 10px 20px;
   border-radius: var(--border-radius);
-  font-size: 16px;
+  font-size: 14px;
   font-weight: 500;
   cursor: pointer;
   transition: var(--transition);
