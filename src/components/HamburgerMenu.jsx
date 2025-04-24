@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../index.css";
 
@@ -6,9 +6,23 @@ const HamburgerMenu = ({ onLogout }) => {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // Toggle body class when menu opens/closes
+    if (isOpen) {
+      document.body.classList.add('menu-open');
+    } else {
+      document.body.classList.remove('menu-open');
+    }
+
+    // Cleanup on unmount
+    return () => {
+      document.body.classList.remove('menu-open');
+    };
+  }, [isOpen]);
+
   const handleNavigation = (path) => {
-    navigate(path);
     setIsOpen(false); // Close the menu after navigating
+    navigate(path);
   };
 
   const toggleMenu = () => {
@@ -42,7 +56,7 @@ const HamburgerMenu = ({ onLogout }) => {
       </nav>
 
       {/* Background Overlay */}
-      <div className={`dark-blue ${isOpen ? "slide" : ""}`} />
+      <div className={`dark-blue ${isOpen ? "slide" : ""}`} onClick={toggleMenu} />
     </>
   );
 };
