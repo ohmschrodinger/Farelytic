@@ -12,16 +12,35 @@ const LocationSearch = ({ onSearch }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [mapsLoading, setMapsLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showLocationError, setShowLocationError] = useState(false);
 
   const pickupAutocompleteRef = useRef(null);
   const dropoffAutocompleteRef = useRef(null);
   const pickupInputRef = useRef(null);
   const dropoffInputRef = useRef(null);
 
-  const handlePlaceSelect = useCallback((place, setSelected, setInputValue) => {
+  const isLocationInMaharashtra = useCallback((place) => {
+    if (!place.address_components) return false;
+    
+    // Check if any address component has Maharashtra as the state
+    return place.address_components.some(component => 
+      component.types.includes('administrative_area_level_1') && 
+      component.long_name.toLowerCase() === 'maharashtra'
+    );
+  }, []);
+
+  const handlePlaceSelect = useCallback((place, setSelected, setInputValue, isDropoff = false) => {
     if (!place.geometry) {
       console.log("No location data available for this place");
       setError("Invalid location selected. Please try again.");
+      return;
+    }
+
+    // Check if location is in Maharashtra
+    if (!isLocationInMaharashtra(place)) {
+      setShowLocationError(true);
+      setSelected(null); // Clear the selected location
+      setInputValue(""); // Clear the input value
       return;
     }
 
@@ -37,7 +56,7 @@ const LocationSearch = ({ onSearch }) => {
     
     // Update the input field value with the formatted address
     setInputValue(locationData.name);
-  }, []);
+  }, [isLocationInMaharashtra]);
 
   const initializePlacesAutocomplete = useCallback(() => {
     if (!window.google || !window.google.maps || !window.google.maps.places) {
@@ -45,7 +64,7 @@ const LocationSearch = ({ onSearch }) => {
       return;
     }
 
-    const initAutocomplete = (inputRef, setSelected, setInputValue) => {
+    const initAutocomplete = (inputRef, setSelected, setInputValue, isDropoff = false) => {
       if (inputRef.current) {
         const autocomplete = new window.google.maps.places.Autocomplete(inputRef.current, {
           types: ["geocode", "establishment"],
@@ -53,15 +72,15 @@ const LocationSearch = ({ onSearch }) => {
 
         autocomplete.addListener("place_changed", () => {
           const place = autocomplete.getPlace();
-          handlePlaceSelect(place, setSelected, setInputValue);
+          handlePlaceSelect(place, setSelected, setInputValue, isDropoff);
         });
 
         return autocomplete;
       }
     };
 
-    pickupAutocompleteRef.current = initAutocomplete(pickupInputRef, setSelectedPickup, setPickup);
-    dropoffAutocompleteRef.current = initAutocomplete(dropoffInputRef, setSelectedDropoff, setDropoff);
+    pickupAutocompleteRef.current = initAutocomplete(pickupInputRef, setSelectedPickup, setPickup, false);
+    dropoffAutocompleteRef.current = initAutocomplete(dropoffInputRef, setSelectedDropoff, setDropoff, true);
   }, [handlePlaceSelect]);
 
   useEffect(() => {
@@ -159,6 +178,21 @@ const LocationSearch = ({ onSearch }) => {
       <h2 className="search-title">Where to?</h2>
 
       {error && <div className="error-message">{error}</div>}
+
+      {showLocationError && (
+        <div className="location-error-popup">
+          <div className="location-error-content">
+            <h3>Invalid Location</h3>
+            <p>Sorry, this location is not supported. Please try a different location.</p>
+            <button 
+              className="close-error-btn"
+              onClick={() => setShowLocationError(false)}
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      )}
 
       <form onSubmit={handleSearch}>
         <div className="location-input-group">
