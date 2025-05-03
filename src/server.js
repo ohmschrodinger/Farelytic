@@ -22,10 +22,23 @@ app.use(cors({
 app.use(express.json());
 
 // Connect to MongoDB
-connectDB().catch(err => {
-    console.error('Failed to connect to MongoDB:', err);
-    // Don't exit process, let the application handle reconnection
-});
+connectDB()
+    .then(() => {
+        console.log('MongoDB connected successfully');
+        
+        // Routes
+        app.use('/api/prices', ridePricesRouter);
+        app.use('/api/todos', todosRouter);
+
+        // Start server
+        app.listen(PORT, () => {
+            console.log(`Server is running on port ${PORT}`);
+        });
+    })
+    .catch(err => {
+        console.error('Failed to start server:', err);
+        process.exit(1);
+    });
 
 // Request logging middleware
 app.use((req, res, next) => {
@@ -33,10 +46,6 @@ app.use((req, res, next) => {
     console.log('Query params:', req.query);
     next();
 });
-
-// Routes
-app.use('/api/prices', ridePricesRouter);
-app.use('/api/todos', todosRouter);
 
 // Health check endpoint
 app.get('/health', (req, res) => {
@@ -59,11 +68,6 @@ app.use((err, req, res, next) => {
         message: err.message || 'Something went wrong!',
         stack: process.env.NODE_ENV === 'development' ? err.stack : undefined
     });
-});
-
-// Start server
-const server = app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
 });
 
 // Handle server shutdown
